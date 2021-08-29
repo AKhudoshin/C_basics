@@ -1,14 +1,16 @@
 #include <stdio.h>
 #include <unistd.h>
 
+
+
   struct meas {
-    int year;
-    int month;
-    int day;
-    int hour;
-    int minute;
-    int temp;
-    int count;
+    
+    int year[518400];
+    int month[518400];
+    int day[518400];
+    int hour[518400];
+    int minute[518400];
+    int temp[518400];
   };
 
 
@@ -26,23 +28,29 @@
     }
 
     struct meas m;  
-    m.count = 0;
+//    m.count = 0;
+    int max;
+    int i = 0;
+    
     while (!feof(f)) {
-     
+      
       fscanf(f, "%d;%d;%d;%d;%d;%d",
-                  &m.year,
-                  &m.month,
-                  &m.day,
-                  &m.hour,
-                  &m.minute,
-                  &m.temp);
-      m.count++;
+                  &m.year[i],
+                  &m.month[i],
+                  &m.day[i],
+                  &m.hour[i],
+                  &m.minute[i],
+                  &m.temp[i]);
+      i++;
       //printf("temp = %d count =%d\n", m.temp, m.count);
       
     }
-    printf("%d %d\n", m.temp, m.count);
-    for(int i=1; i<m.count;i++) {
-      if(i==2) {printf("temp of 2 add = %d\n", m.temp);}
+    max = i - 1;
+
+//    printf("%d %d\n", m.temp, m.count);
+
+    for(i = 1; i < max; i++) {
+      printf("temp of %d row = %d\n", i, m.temp[i]);
     }
 //    printf("max temp was %d\n", maxTemp(m));
     fclose(f);
